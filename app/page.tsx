@@ -35,7 +35,7 @@ type Result = {
   title: string;
   lines: string[];
   remaining?: number;
-} | null;
+};
 
 const initialEmployees: Employee[] = [
   {
@@ -275,7 +275,7 @@ export default function Home() {
   const [end, setEnd] = useState("2026-08-17");
   const [days, setDays] = useState("1");
   const [reason, setReason] = useState("");
-  const [result, setResult] = useState<Result>(null);
+  const [result, setResult] = useState<Result | null>(null);
   const [filter, setFilter] = useState<"전체" | LeaveType>("전체");
   const [activePolicy, setActivePolicy] = useState(0);
 
@@ -284,7 +284,7 @@ export default function Home() {
     if (saved) {
       try {
         const state = JSON.parse(saved);
-        const savedEmployees = new Map(
+        const savedEmployees = new Map<string, Employee>(
           state.employees.map((item: Employee) => [item.id, item]),
         );
         setEmployees(
